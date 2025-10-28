@@ -47,7 +47,7 @@ public class Main {
             }
             contador++;
 
-        } while (contador < 3 && !salir) ;
+        } while (contador < 3 && !salir);
 
         JOptionPane.showMessageDialog(null,
                 "RESULTADOS:\n" +
@@ -57,4 +57,16 @@ public class Main {
         );
         JOptionPane.showMessageDialog(null, "Programa finalizado");
     }
+        private static String pedirDescripcion(int numero) {
+            String descripcion;
+            do {
+                descripcion = JOptionPane.showInputDialog("Producto " + numero + "\nDescripción (Introduzca un 0 si quiere salir):");
+                if (descripcion == null || descripcion.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "La descripción no puede estar vacía.");
+                }
+            } while (descripcion == null || descripcion.trim().isEmpty());
+            return descripcion.trim();
+        }
+
 }
+
