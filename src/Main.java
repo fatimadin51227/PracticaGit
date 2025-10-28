@@ -17,5 +17,44 @@ public class Main {
         String descripcionMasPronto = "";
         LocalDate fechaMasPronto = null;
         boolean salir = false;
+
+        do {
+            String descripcion = pedirDescripcion(contador + 1);
+            if (descripcion.equals("0")) {
+                salir = true;
+                break;
+            }
+            int unidades = pedirUnidades();
+            if (unidades == 0) {
+                salir = true;
+                break;
+            }
+            LocalDate fechaCaducidad = pedirFecha();
+
+            if (descripcion.length() > longitudMasLarga) {
+                longitudMasLarga = descripcion.length();
+                descripcionMasLarga = descripcion;
+            }
+
+            if (unidades > maxUnidades) {
+                maxUnidades = unidades;
+                descripcionMasUnidades = descripcion;
+            }
+
+            if (fechaMasPronto == null || fechaCaducidad.isBefore(fechaMasPronto)) {
+                fechaMasPronto = fechaCaducidad;
+                descripcionMasPronto = descripcion;
+            }
+            contador++;
+
+        } while (contador < 3 && !salir) ;
+
+        JOptionPane.showMessageDialog(null,
+                "RESULTADOS:\n" +
+                        "Producto con descripción más larga: " + descripcionMasLarga + "\n" +
+                        "Producto con más unidades: " + descripcionMasUnidades + " (" + maxUnidades + " unidades)\n" +
+                        "Producto que caduca primero: " + descripcionMasPronto + " (Caduca: " + fechaMasPronto + ")"
+        );
+        JOptionPane.showMessageDialog(null, "Programa finalizado");
     }
 }
